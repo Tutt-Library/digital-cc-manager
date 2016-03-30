@@ -4,38 +4,16 @@
 {% block navigation %}{% endblock %}
 
 {% block main %}
-<div id="content"></div>
+<div class="container">
+    <h1>Fedora Repository Add Objects</h1>
+    <div class="row">
+        <section class="col-md-4">
+            <a href="{{ url_for('new_fedora_object') }}"
+               class="btn btn-default">Add Object</a>
+        </section>
+    </div>
+</div>
 {% endblock %}
 
 {% block scripting %}
-<script type="text/babel">
-var navbar = React.createClass({
-  render: function() {
-    return (
-        <div className="btn-toolbar" role="toolbar" aria-label="DigitalCC CRUD Toolbar">
-          <div className="btn-group" role="group" aria-label="Individual Objects">
-            <button type="button" className="btn btn-secondary btn-success">Add</button>
-          </div>
-        </div>
-    );
-
-  }
-});
-
-var homePage = React.createClass({
-  render: function() {
-    return (
-      <div className="container">
-        <h1>DigitalCC Manager</h1>
-        <navbar />
-      </div>
-    );
-  }
-});
-ReactDOM.render(
-    {#React.createElement(homePage, null),#}
-    <homePage />,
-    document.getElementById('content')
-  );
-</script>
 {% endblock %}

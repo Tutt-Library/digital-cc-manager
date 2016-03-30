@@ -2,9 +2,22 @@
 
 __author__ = "Jeremy Nelson, Sarah Bogard"
 
-from flask import render_template
+from flask import abort, render_template, request
 
 from .app import app
+from .forms import MODSMetadata
+
+@app.route("/new", methods=["GET", "POST"])
+def new_fedora_object():
+    """New View for adding and saving Fedora Objects"""
+    mods_form = MODSMetadata()
+    if mods_form.validate_on_submit():
+        return "Success"
+    return render_template(
+        "manager/object.html",
+        action="Add",
+        add_obj_form=mods_form)
+
 
 @app.route("/<path:page>")
 @app.route("/")
