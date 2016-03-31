@@ -2,18 +2,16 @@
 
 {% block main %}
 {# START addObjectFromTemplate DIV #}
-<div class="well well-small container">
-   <a name="add-obj-w-template"></a>
+<div class="container">
    <h2>{{ action }} Fedora Object(s)</h2>
    <p>Adds one or more brief Fedora Objects using a MODS 
       template of prefilled data to the digital repository.</p>
    <form method="POST" 
-         class="form-horizontal" 
          action="{{ url_for('new_fedora_object') }}">
     {{ add_obj_form.csrf_token }}
     {# START Object Select #}
-    <div class="form-group">
-     <label class="col-md-2 control-label" 
+    <div class="form-group row">
+     <label class="col-md-2 form-control-label" 
             for="object_template">
       {{ add_obj_form.object_template.label }}
      </label>
@@ -23,8 +21,8 @@
     {# END Object Select #}
     </div>
     {# START title #}
-    <div class="form-group">
-     <label class="col-md-2 control-label" 
+    <div class="form-group row">
+     <label class="col-md-2 form-control-label" 
             for="title">
      {{ add_obj_form.title.label }}
      </label>
@@ -34,7 +32,7 @@
     {# END title #}
     </div>
     {# START Parent Collection PID #}
-    <div class="form-group">
+    <div class="form-group row">
      <label class="control-label col-md-2" for="collection_pid">
        {{ add_obj_form.collection_pid.label }}
      </label>
@@ -46,7 +44,7 @@
     {# START submit #}
     <div class="form-group">
      <div class="controls col-lg-6">
-      <input type="submit" class="btn btn-primary" value="Add Stub Record(s)">
+      <input type="submit" class="btn btn-success" value="Add Stub Record(s)">
      </div>
     {# END submit #}
     </div>
