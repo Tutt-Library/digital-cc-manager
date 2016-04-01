@@ -1,0 +1,83 @@
+<div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="titleHeading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" 
+           data-parent="#objAccordion" 
+           href="#title" aria-expanded="true" 
+           aria-controls="">
+         Title, Creators, &amp; Contributors 
+        </a>
+      </h4>
+    </div>
+    <div id="title" 
+         class="panel-collapse collapse in" 
+         role="tabpanel" 
+         aria-labelledby="titleHeading">
+
+    {# START title #}
+    <div class="form-group row">
+     <label class="col-md-2 form-control-label" 
+            for="title">
+     {{ obj_form.title.label }}
+     </label>
+      <div class="col-md-5"> 
+       {{ obj_form.title(class_="form-control") }}
+      </div>
+    {# END title #}
+    </div>
+
+    {# START creators title #}
+    <div class="form-group row">
+     <label class="col-md-2 form-control-label" for="creators">
+       {{ obj_form.creators.label }}
+     </label>
+
+     <div class="col-lg-4">
+       {{ obj_form.creators(class_="form-control") }}
+      <a href="#" 
+         data-bind="click: addCreator" 
+         id="AddCreatorBtn">
+        <i class="fa fa-plus-circle"></i>
+      </a>
+     </div>
+    {# END alternate creators #}
+    </div>
+
+
+     {# START corporate creators #}
+    <div class="form-group row" 
+         data-bind="visible: showCorporateCreators">
+     <label class="form-control-label col-md-2" 
+        for="corporate_contributors ">
+     {{ obj_form.corporate_creators.label }}
+     </label>
+     <div class="col-md-4">
+      {{ obj_form.corporate_creators(class_="form-control") }}
+      <a href="#" data-bind="click: addCorporateCreator" 
+                  id="AddCorporateCreatorBtn">
+       <i class="fa fa-plus-circle"></i>
+      </a>
+     </div>
+    {# END corporate creators #}
+    </div>
+
+
+    {# START contributors #}
+    <div class="form-group row" data-bind="visible: showContributors">
+     <label class="form-control-label col-md-2" for="contributors ">
+     {{ obj_form.contributors.label }}
+     </label>
+     <div class="col-lg-4">
+      {{ obj_form.contributors(class_="form-control") }}
+      <a href="#" data-bind="click: addContributor" 
+                  id="AddContributorBtn">
+       <i class="fa fa-plus-circle"></i>
+      </a>
+     </div>
+    {# END contributors #}
+    </div>
+
+
+   </div>
+  </div>
+

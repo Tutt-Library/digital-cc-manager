@@ -1,0 +1,100 @@
+<div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="dateHeading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" 
+           data-parent="#objAccordion" 
+           href="#dates-desc" aria-expanded="true" 
+           aria-controls="">
+           Dates &amp; Descriptive Metadata 
+        </a>
+      </h4>
+    </div>
+    <div id="dates-desc" 
+         class="panel-collapse collapse" 
+         role="tabpanel" 
+         aria-labelledby="dateHeading">
+
+    {# START Date Created #}
+    <div class="form-group row">
+     <label class="form-control-label col-md-2" for="date_created">
+       {{ obj_form.date_created.label }}
+     </label>
+     <div class="col-md-3">
+      {{ obj_form.date_created(class_="form-control") }}
+     </div>
+    {# END Date Created #}
+    </div>
+
+    {# START Digital Origin #}
+    <div class="form-group row">
+     <label class="form-control-label col-md-2" for="digital_origin">
+      {{ obj_form.digital_origin.label }}
+     </label>
+     <div class="col-md-3">
+       {{ obj_form.digital_origin(class_="form-control") }}
+      </div>
+    {# END digital origin #}
+    </div>
+
+    {# START Type of Resource #}
+    <div class="form-group row">
+     <label class="form-control-label col-md-2" for="type_of_resource">
+      {{ obj_form.type_of_resource.label }}
+     </label>
+     <div class="col-md-3">
+       {{ obj_form.type_of_resource(class_="form-control") }}
+      </div>
+    {# END Type of Resource  #}
+    </div>
+
+    {# START Genre #}
+    <div class="form-group row" data-bind="visible: showGenre">
+     <label class="control-label col-md-2" for="genre">
+      {{ obj_form.genre.label }}
+     </label>
+     <div class="col-md-4">
+       {{ obj_form.genre(class_="form-control") }} <strong>Or</strong> 
+       {{ obj_form.genre_free_form.label }}: 
+       {{ obj_form.genre_free_form(class_="form-control") }}
+     </div>
+    {# END Genre #}
+    </div>
+
+    {# START Form #}
+    <div class="form-group row" data-bind="visible: showForm">
+     <label class="form-control-label col-md-2" for="genre">
+      {{ obj_form.form.label }}
+     </label>
+     <div class="col-md-3">
+       {{ obj_form.form(class_="form-control") }}
+     </div>
+    {# END Genre #}
+    </div>
+
+    {# START description #}
+    <div class="form-group row">
+     <label class="form-control-label col-md-2" for="digital_origin">
+     {{ obj_form.description.label }}
+     </label>
+     <div class="col-md-6">
+      {{ obj_form.description(class_="form-control", rows=4) }}
+     </div>
+    {# END description #}
+    </div>
+
+    {# START extent #}
+    <div class="form-group row" 
+         data-bind="visible: showExtent">
+      <label class="form-control-label col-md-2" for="extent">
+       {{ obj_form.extent.label }}
+      </label>
+      <div class="col-md-3">
+        {{ obj_form.extent(class_="form-control") }}
+      </div>
+    {# END extent #}
+    </div>
+
+
+    </div>
+</div>
+

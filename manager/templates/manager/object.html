@@ -8,36 +8,32 @@
       template of prefilled data to the digital repository.</p>
    <form method="POST" 
          action="{{ url_for('new_fedora_object') }}">
-    {{ add_obj_form.csrf_token }}
+    {{ obj_form.csrf_token }}
     {# START Object Select #}
     <div class="form-group row">
      <label class="col-md-2 form-control-label" 
             for="object_template">
-      {{ add_obj_form.object_template.label }}
+      {{ obj_form.object_template.label }}
      </label>
      <div class="col-md-3">
-       {{ add_obj_form.object_template(class_="form-control") }}
+       {{ obj_form.object_template(class_="form-control") }}
      </div>
     {# END Object Select #}
     </div>
-    {# START title #}
-    <div class="form-group row">
-     <label class="col-md-2 form-control-label" 
-            for="title">
-     {{ add_obj_form.title.label }}
-     </label>
-      <div class="col-md-5"> 
-       {{ add_obj_form.title(class_="form-control") }}
-      </div>
-    {# END title #}
+    <div id="objAccordion" role="tablist" aria-multiselectable="true">
+    {% include 'manager/snippets/title-creators-contributors.html' %}
+    {% include 'manager/snippets/dates-descriptive.html' %}
+
     </div>
+
+
     {# START Parent Collection PID #}
     <div class="form-group row">
      <label class="control-label col-md-2" for="collection_pid">
-       {{ add_obj_form.collection_pid.label }}
+       {{ obj_form.collection_pid.label }}
      </label>
-     <div class="col-lg-4">
-       {{ add_obj_form.collection_pid(class_="form-control") }}
+     <div class="col-md-3">
+       {{ obj_form.collection_pid(class_="form-control") }}
      </div>
     {# END Parent Collection PID #}
     </div> 

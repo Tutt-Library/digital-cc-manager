@@ -6,6 +6,7 @@ __author__ = "Jeremy Nelson"
 import datetime
 
 from flask_wtf import Form
+from wtforms.fields.html5 import DateField, DateTimeField
 from wtforms import SelectField, StringField, TextAreaField
 from wtforms.validators import DataRequired
 
@@ -53,49 +54,16 @@ class MODSMetadata(Form):
     alt_title = StringField(label='Alternative Title')
     collection_pid = StringField(label="PID of Parent Collection")
                                  
-##    contributors = forms.CharField(required=False,
-##                                   widget=forms.TextInput(
-##                                         attrs={'class': 'form-control'}))
-##    corporate_contributors = forms.CharField(
-##        required=False,
-##        widget=forms.TextInput(
-##            attrs={'class': 'form-control'}))
-##    corporate_creators = forms.CharField(
-##        required=False,
-##        widget=forms.TextInput(
-##            attrs={'class': 'form-control'}))
-##    creators = forms.CharField(required=False,
-##                               widget=forms.TextInput(
-##                                         attrs={'class': 'form-control'}))
-##    date_created = forms.CharField(label='Date Created',
-##                                   required=False,
-##                                   widget=forms.TextInput(
-##                                         attrs={'class': 'form-control'}))
-##    digital_origin = forms.ChoiceField(choices=DIGITAL_ORIGIN,
-##                                       label='Digital Origin',
-##                                       initial=1,
-##                                       widget=forms.Select(
-##                                            attrs={
-##                                                 'class': 'form-control'}))
-##    description = forms.CharField(label='Description',
-##                                  max_length=1500,
-##                                  widget=forms.Textarea(
-##                                      attrs={'class': 'form-control',
-##                                             'rows':5}),
-##                                  required=False)
-##    extent = forms.CharField(label='Extent',
-##                             max_length=1500,
-##                             widget=forms.Textarea(
-##                                 attrs={'rows':5,
-##                                        'class': 'form-control',
-##                                        'data-bind': 'value: extentValue'}),
-##                             required=False)
-##    form = forms.CharField(label='Form',
-##                           required=False,
-##                           widget=forms.TextInput(
-##                               attrs={
-##                                   'class': 'form-control',
-##                                   'data-bind': 'value: formValue'}))
+    contributors = StringField("Contributors")
+    corporate_contributors = StringField("Corporate Contributors")
+    corporate_creators = StringField("Corporate Creators")
+    creators = StringField("Creators")
+    date_created = DateField(label='Date Created')
+    digital_origin = SelectField(choices=DIGITAL_ORIGIN,
+                                       label='Digital Origin')
+    description = TextAreaField(label='Description')
+    extent = StringField(label='Extent')
+    form = StringField(label='Form')
 ##    frequency_free_form = forms.CharField(label='Other',
 ##                                          required=False,
 ##                                          widget=forms.TextInput(
@@ -105,16 +73,8 @@ class MODSMetadata(Form):
 ##                                  required=False,
 ##                                  widget=forms.Select(
 ##                                      attrs={'class': 'form-control'}))
-##    genre = forms.ChoiceField(
-##        label='Genre',
-##        required=False,
-##        widget=forms.Select(
-##            attrs={'data-bind': "options: genreOptions, optionsText: 'name', optionsValue: 'value'",
-##                   'class': 'form-control'}))
-##    genre_free_form = forms.CharField(label='Other',
-##                                      required=False,
-##                                      widget=forms.TextInput(
-##                                              attrs={'class': 'form-control'}))
+    genre = SelectField(label='Genre', choices=[("choose","Choose genre")])
+    genre_free_form = StringField(label='Other')
 ##    number_objects = forms.CharField(initial=1,
 ##                                     label='Number of stub records',
 ##                                     max_length=5,
@@ -154,14 +114,8 @@ class MODSMetadata(Form):
 ##                   'class': 'form-control'}))
     title = StringField(label='Title',
                         validators=[DataRequired()])
-
-                        ##    type_of_resource = forms.CharField(
-##        label='Type of Resource',
-##        required=False,
-##        widget=forms.TextInput(
-##            attrs={'data-bind': 'value: typeOfResource',
-##                   'class': 'form-control'}))
-##
+    type_of_resource = StringField(
+        label='Type of Resource')
 ##    def clean(self):
 ##        if self._errors.has_key('genre'):
 ##            del self._errors['genre']

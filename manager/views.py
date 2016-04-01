@@ -16,7 +16,7 @@ def new_fedora_object():
     return render_template(
         "manager/object.html",
         action="Add",
-        add_obj_form=mods_form)
+        obj_form=mods_form)
 
 
 @app.route("/<path:page>")
