@@ -23,20 +23,11 @@
     <div id="objAccordion" role="tablist" aria-multiselectable="true">
     {% include 'manager/snippets/title-creators-contributors.html' %}
     {% include 'manager/snippets/dates-descriptive.html' %}
-
+    {% include 'manager/snippets/subjects.html' %}
+    {% include 'manager/snippets/rights-repository.html' %}
     </div>
 
 
-    {# START Parent Collection PID #}
-    <div class="form-group row">
-     <label class="control-label col-md-2" for="collection_pid">
-       {{ obj_form.collection_pid.label }}
-     </label>
-     <div class="col-md-3">
-       {{ obj_form.collection_pid(class_="form-control") }}
-     </div>
-    {# END Parent Collection PID #}
-    </div> 
     {# START submit #}
     <div class="form-group">
      <div class="controls col-lg-6">

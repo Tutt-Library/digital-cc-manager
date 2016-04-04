@@ -1,0 +1,32 @@
+<div class="panel panel-primary">
+    <div class="panel-heading" role="tab" id="subjectHeading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" 
+           data-parent="#objAccordion" 
+           href="#subjects" aria-expanded="true" 
+           aria-controls="">
+           Subjects 
+        </a>
+      </h4>
+    </div>
+    <div id="subjects" 
+         class="panel-collapse collapse" 
+         role="tabpanel" 
+         aria-labelledby="subjectHeading">
+
+    {# START people subjects #}
+    <div class="form-group row" data-bind="visible: meetingMinutesTemplate">
+     <label class="form-control-label col-md-2" for="subject_people">
+     {{ obj_form.subject_people.label }}
+     </label>
+     <div class="col-md-3">
+      {{ obj_form.subject_people(class_="form-control") }}
+      <a href="#" data-bind="click: addPerson" id="AddPersonBtn">
+        <i class="fa fa-plus-circle"></i>
+      </a>
+     </div>
+    {# END people subjects #}
+    </div>
+
+    </div>
+</div>

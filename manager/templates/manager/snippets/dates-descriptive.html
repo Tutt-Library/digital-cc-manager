@@ -94,7 +94,19 @@
     {# END extent #}
     </div>
 
-
+    {# START frequency #}
+    <div class="form-group row" data-bind="visible: newsletterTemplate">
+      <label class="form-control-label col-md-2" for="frequency">
+      {{ obj_form.frequency.label }}
+      </label> 
+      <div class="col-md-3"> 
+        {{ obj_form.frequency(class_='form-control') }}
+       <strong>Or</strong><br>
+       {{ obj_form.frequency_free_form.label }}: 
+       {{ obj_form.frequency_free_form(class_='form-control') }}
+      </div>
+    </div>
+    {# END frequency #}
     </div>
 </div>
 

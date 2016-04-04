@@ -64,22 +64,12 @@ class MODSMetadata(Form):
     description = TextAreaField(label='Description')
     extent = StringField(label='Extent')
     form = StringField(label='Form')
-##    frequency_free_form = forms.CharField(label='Other',
-##                                          required=False,
-##                                          widget=forms.TextInput(
-##                                              attrs={'class': 'form-control'}))
-##    frequency = forms.ChoiceField(choices=MARC_FREQUENCY,
-##                                  label='Frequency',
-##                                  required=False,
-##                                  widget=forms.Select(
-##                                      attrs={'class': 'form-control'}))
+    frequency_free_form = StringField(label='Other')
+    frequency = SelectField(choices=MARC_FREQUENCY,
+                            label='Frequency')
     genre = SelectField(label='Genre', choices=[("choose","Choose genre")])
     genre_free_form = StringField(label='Other')
-##    number_objects = forms.CharField(initial=1,
-##                                     label='Number of stub records',
-##                                     max_length=5,
-##                                     widget=forms.TextInput(
-##                                         attrs={'class': 'form-control'}))
+    number_objects = StringField(label='Number of records')
     object_template = SelectField(label='Content Model Template',
                                   choices=OBJECT_TEMPLATES)
 ##    organizations = forms.CharField(max_length=255,
@@ -87,9 +77,8 @@ class MODSMetadata(Form):
 ##                                    initial=INSTITUTION_NAME,
 ##                                    widget=forms.TextInput(
 ##                                         attrs={'class': 'form-control'}))
-##    rights_holder = forms.CharField(max_length=255,
-##                                    label='Rights Statement',
-##                                    initial=RIGHTS_STATEMENT,
+    rights_holder = TextAreaField(label='Rights Statement',
+                                  default=RIGHTS_STATEMENT)
 ##                                    widget=forms.Textarea(
 ##                                        attrs={'rows': 3,
 ##                                               'class': 'form-control'}))
@@ -97,10 +86,7 @@ class MODSMetadata(Form):
 ##                                    required=False,
 ##                                    widget=forms.TextInput(
 ##                                         {'class': 'form-control'}))
-##    subject_people = forms.CharField(label='Subject -- People',
-##                                     required=False,
-##                                     widget=forms.TextInput(
-##                                         {'class': 'form-control'}))
+    subject_people = StringField(label='Subject -- People')
 ##    subject_places = forms.CharField(label='Subject -- Places',
 ##                                     required=False,
 ##                                     initial=PLACE,
