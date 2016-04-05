@@ -8,17 +8,31 @@ import datetime
 from flask_wtf import Form
 from wtforms.fields.html5 import DateField, DateTimeField
 from wtforms import SelectField, StringField, TextAreaField
+from wtforms import FormField, FieldList, FileField
 from wtforms.validators import DataRequired
 
-DIGITAL_ORIGIN = [(1, 'born digital'),
-                  (2, 'reformatted digital'),
-                  (3, 'digitized microfilm'),
-                  (4, 'digitized other analog')]
+DIGITAL_ORIGIN = [('1', 'born digital'),
+                  ('2', 'reformatted digital'),
+                  ('3', 'digitized microfilm'),
+                  ('4', 'digitized other analog')]
 
 
 GENRE = [('choose', 'Choose...')]
 
 INSTITUTION_NAME = 'Colorado College'
+
+ISLANDORA_CONTENT_MODELS = [
+    ('audio', 'Audio'),
+    ('basic-img', 'Basic Image'),
+    ('collection', 'Collection'),
+    ('compound', 'Compound'),
+    ('doc', 'Document'),
+    ('book', 'Book'),
+    ('lg-img', 'Large Image'),
+    ('news', 'Newspaper'),
+    ('newspaper-issue', "Newspaper Issue"),
+    ('pdf', 'PDF'),
+    ('video', "Video")]
 
 MARC_FREQUENCY = [('choose', 'Choose...'),
                   ('Semiweekly', 'Semiweekly - 2 times a week'),
@@ -49,18 +63,25 @@ PLACE = 'Colorado Springs (Colo.)'
 PUBLISHER = "Colorado College"
 PUBLICATION_PLACE = 'Colorado Springs, Colorado'
 
+class DatastreamUpload(Form):
+    content_model = SelectField(
+        "Content Model",
+        choices=ISLANDORA_CONTENT_MODELS)
+    ds_label = StringField("Label")
+    datastream = FileField("Datastream")
+
 class MODSMetadata(Form):
     admin_note = TextAreaField(label='Administrative Notes')
     alt_title = StringField(label='Alternative Title')
     collection_pid = StringField(label="PID of Parent Collection")
-                                 
-    contributors = StringField("Contributors")
+    contributors = FieldList(StringField("Contributors"), min_entries=1)
     corporate_contributors = StringField("Corporate Contributors")
     corporate_creators = StringField("Corporate Creators")
     creators = StringField("Creators")
+    datastreams = FieldList(FormField(DatastreamUpload), min_entries=1)
     date_created = DateField(label='Date Created')
     digital_origin = SelectField(choices=DIGITAL_ORIGIN,
-                                       label='Digital Origin')
+                                 label='Digital Origin')
     description = TextAreaField(label='Description')
     extent = StringField(label='Extent')
     form = StringField(label='Form')
@@ -72,50 +93,20 @@ class MODSMetadata(Form):
     number_objects = StringField(label='Number of records')
     object_template = SelectField(label='Content Model Template',
                                   choices=OBJECT_TEMPLATES)
-##    organizations = forms.CharField(max_length=255,
-##                                    required=False,
-##                                    initial=INSTITUTION_NAME,
-##                                    widget=forms.TextInput(
-##                                         attrs={'class': 'form-control'}))
+    organizations = FieldList(StringField("Organization", default=PUBLISHER), min_entries=1)
     rights_holder = TextAreaField(label='Rights Statement',
                                   default=RIGHTS_STATEMENT)
-##                                    widget=forms.Textarea(
-##                                        attrs={'rows': 3,
-##                                               'class': 'form-control'}))
-##    subject_dates = forms.CharField(label='Subject -- Dates',
-##                                    required=False,
-##                                    widget=forms.TextInput(
-##                                         {'class': 'form-control'}))
+    subject_dates = FieldList(
+        StringField(label='Subject -- Dates'), 
+        min_entries=1)
     subject_people = StringField(label='Subject -- People')
-##    subject_places = forms.CharField(label='Subject -- Places',
-##                                     required=False,
-##                                     initial=PLACE,
-##                                     widget=forms.TextInput(
-##                                         {'class': 'form-control'}))
-##    subject_topics = forms.CharField(
-##        label='Subject -- Topic',
-##        required=False,
-##        widget=forms.TextInput(
-##            attrs={'data-bind': 'value: topicOne',
-##                   'class': 'form-control'}))
+    subject_places = FieldList(
+        StringField(label='Subject -- Places', default=PLACE), 
+        min_entries=1)
+    subject_topics = FieldList(
+        StringField(label='Subject -- Topic'), 
+        min_entries=1)
     title = StringField(label='Title',
                         validators=[DataRequired()])
     type_of_resource = StringField(
         label='Type of Resource')
-##    def clean(self):
-##        if self._errors.has_key('genre'):
-##            del self._errors['genre']
-##        return self.cleaned_data
-##
-##
-##
-##class BatchIngestForm(Form):
-##    collection_pid = forms.CharField(max_length=20)
-##    compressed_file = forms.FileField(label="A .tar or .zip file",
-##                                      required=False)
-##    target_directory = forms.FileField(label="Select Directory to upload",
-##                                       required=False,
-##                                       widget=forms.ClearableFileInput(attrs={"webkitdirectory":"",
-##                                                                              "directory":"",
-##                                                                              "mozdirectory":""}))
-

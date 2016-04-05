@@ -11,6 +11,7 @@ from .forms import MODSMetadata
 def new_fedora_object():
     """New View for adding and saving Fedora Objects"""
     mods_form = MODSMetadata()
+    print(mods_form.validate_on_submit(), mods_form.errors)
     if mods_form.validate_on_submit():
         return "Success"
     return render_template(

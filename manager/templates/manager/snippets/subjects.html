@@ -5,7 +5,7 @@
            data-parent="#objAccordion" 
            href="#subjects" aria-expanded="true" 
            aria-controls="">
-           Subjects 
+           <i class="fa fa-info"></i> Subjects 
         </a>
       </h4>
     </div>
@@ -19,7 +19,7 @@
      <label class="form-control-label col-md-2" for="subject_people">
      {{ obj_form.subject_people.label }}
      </label>
-     <div class="col-md-3">
+     <div class="col-md-4">
       {{ obj_form.subject_people(class_="form-control") }}
       <a href="#" data-bind="click: addPerson" id="AddPersonBtn">
         <i class="fa fa-plus-circle"></i>
@@ -28,5 +28,52 @@
     {# END people subjects #}
     </div>
 
+    {# START date subjects #}
+    <div class="form-group row" data-bind="visible: showSubjectDates">
+     <label class="form-control-label col-md-2" for="subject_dates">
+     {{ obj_form.subject_dates.0.label }}
+
+     </label>
+     <div class="col-md-3">
+      {% for row in obj_form.subject_dates %}
+       {{ row(class_="form-control") }}
+      <a href="#" data-bind="click: addDate" id="AddDateBtn">
+        <i class="fa fa-plus-circle"></i>
+      </a>
+      {% endfor %}
+     </div>
+    {# END date subjects #}
+    </div>
+
+   {# START place subjects #}
+    <div class="form-group row">
+     <label class="form-control-label col-md-2" for="subject_places">
+     {{ obj_form.subject_places.0.label }}
+     </label>
+     <div class="col-md-4">
+       {% for row in obj_form.subject_places %}
+        {{ row(class_="form-control") }}
+       <a href="#" data-bind="click: addPlace" id="AddPlaceBtn">
+        <i class="fa fa-plus-circle"></i>
+       </a>
+        {% endfor %}
+     </div>
+    {# END place subjects #}
+    </div>
+    {# START organizations #}
+    <div class="form-group row">
+     <label class="control-label col-md-2" for="organizations">
+     {{ obj_form.organizations.0.label }}
+     </label>
+     <div class="col-lg-4">
+      {% for row in obj_form.organizations %}
+      {{ row(class_="form-control") }} 
+      <a href="#" data-bind="click: addOrganization" id="AddOrgBtn">
+       <i class="fa fa-plus-circle"></i>
+      </a>
+      {% endfor %}
+     </div>
+    {# END organizations #}
+    </div>
     </div>
 </div>

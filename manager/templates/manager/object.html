@@ -16,7 +16,8 @@
       {{ obj_form.object_template.label }}
      </label>
      <div class="col-md-3">
-       {{ obj_form.object_template(class_="form-control") }}
+       {{ obj_form.object_template(class_="form-control", 
+              **{"data-bind": "click: displayContentModel, value: chosenContentModel"}) }}
      </div>
     {# END Object Select #}
     </div>
@@ -25,13 +26,15 @@
     {% include 'manager/snippets/dates-descriptive.html' %}
     {% include 'manager/snippets/subjects.html' %}
     {% include 'manager/snippets/rights-repository.html' %}
+    {% include 'manager/snippets/datastreams.html' %}
+
     </div>
 
 
     {# START submit #}
     <div class="form-group">
      <div class="controls col-lg-6">
-      <input type="submit" class="btn btn-success" value="Add Stub Record(s)">
+      <input type="submit" class="btn btn-primary" value="Add Object(s)">
      </div>
     {# END submit #}
     </div>
@@ -42,8 +45,26 @@
 {% endblock %}
 
 {% block more_js %}
-<script src="{{ STATIC_URL }}js/bootstrap-typeahead.js"></script>
-<script src="{{ STATIC_URL }}js/knockout.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+<script type="text/html" id="datastream-template">
+<div class="row">
+   <div class="form-group col-md-3">
+    <label class="form-control-label">Content Model</label>
+    <select name="datastreams-content_model" class="form-control"
+            data-bind="value: content_model">
+
+    </select>
+   </div>
+  <div class="form-group col-md-6">
+    <label class="form-control-label">Datastream Label</label>
+   <input type="text"></input>
+
+   <label class="form-control-label">Datastream</label>
+   <input type="file" data-bind="attr: { "name": name }"
+    class="form-control"> </input>
+  </div>
+</div>
+</script>
 <script>
  function AddStubViewModel() {
    var self = this;
@@ -154,6 +175,11 @@
 
    self.addCreator = function() {
     self.addAdditionalField("AddCreatorBtn", 'creators');
+   }
+
+   self.addDatastream = function() {
+      var last_row = $("#AddDSBtn").parent().parent();
+      last_row.after(last_row.val() + "<hr>")
    }
 
    self.addDate = function() {

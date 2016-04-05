@@ -1,11 +1,15 @@
 <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="dateHeading">
       <h4 class="panel-title">
+           {% if obj_form.date_created.errors or obj_form.digital_origin.errors or obj_form.type_of_resource.errors or obj_form.genre.errors or obj_form.form.errors %}
+            <span style="color: red">ERRORS!</span>
+           {% endif %}
+
         <a data-toggle="collapse" 
            data-parent="#objAccordion" 
            href="#dates-desc" aria-expanded="true" 
            aria-controls="">
-           Dates &amp; Descriptive Metadata 
+           <i class="fa fa-calendar"></i> Dates &amp; Descriptive Metadata 
         </a>
       </h4>
     </div>
@@ -15,7 +19,17 @@
          aria-labelledby="dateHeading">
 
     {# START Date Created #}
-    <div class="form-group row">
+    <div class="form-group row {% if obj_form.date_created.errors %}bg-danger{% endif %}">
+    {% if obj_form.date_created.errors %}
+        <div class="col-md-2">
+        <h5>Errors</h5>
+        <ol>
+            {% for error in obj_form.date_created.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ol>
+        </div>
+    {% endif %}
      <label class="form-control-label col-md-2" for="date_created">
        {{ obj_form.date_created.label }}
      </label>
@@ -26,7 +40,17 @@
     </div>
 
     {# START Digital Origin #}
-    <div class="form-group row">
+    <div class="form-group row {% if obj_form.digital_origin.errors %}bg-danger{% endif %}">
+     {% if obj_form.digital_origin.errors %}
+        <div class="col-md-2">
+        <h5>Errors</h5>
+       <ol>
+        {% for error in obj_form.digital_origin.errors %}
+        <li><strong>{{ error }}</strong></li>
+        {% endfor %}
+       </ol>
+        </div>
+     {% endif %}
      <label class="form-control-label col-md-2" for="digital_origin">
       {{ obj_form.digital_origin.label }}
      </label>
@@ -37,7 +61,17 @@
     </div>
 
     {# START Type of Resource #}
-    <div class="form-group row">
+    <div class="form-group row {% if obj_form.type_of_resource.errors %}bg-danger{% endif %}">
+    {% if obj_form.type_of_resource.errors %}
+     <div class="col-md-2">
+        <h5>Errors</h5>
+       <ol>
+        {% for error in obj_form.type_of_resource.errors %}
+        <li><strong>{{ error }}</strong></li>
+        {% endfor %}
+       </ol>
+
+    {% endif %}
      <label class="form-control-label col-md-2" for="type_of_resource">
       {{ obj_form.type_of_resource.label }}
      </label>

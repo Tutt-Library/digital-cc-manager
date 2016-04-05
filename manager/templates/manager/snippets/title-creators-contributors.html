@@ -1,11 +1,15 @@
 <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="titleHeading">
       <h4 class="panel-title">
+        {% if obj_form.title.errors or obj_form.creators.errors %}
+        <span style="color: red">ERRORS!</span>
+        {% endif %}
+
         <a data-toggle="collapse" 
            data-parent="#objAccordion" 
            href="#title" aria-expanded="true" 
            aria-controls="">
-         Title, Creators, &amp; Contributors 
+         <i class="fa fa-female"></i> Title, Creators, &amp; Contributors 
         </a>
       </h4>
     </div>
@@ -15,10 +19,20 @@
          aria-labelledby="titleHeading">
 
     {# START title #}
-    <div class="form-group row">
+    <div class="form-group row {% if obj_form.title.errors %}bg-danger{% endif %}">
+    {% if obj_form.title.errors %}
+        <div class="col-md-2">
+        <h5>Errors</h5>
+        <ol>
+        {% for error in obj_form.title.errors %}
+            <li><strong>{{ error }}</strong></li>
+        {% endfor %}
+        </ol>
+        </div>
+    {% endif %}
      <label class="col-md-2 form-control-label" 
             for="title">
-     {{ obj_form.title.label }}
+     {{ obj_form.title.label }} <sup>*</sup>
      </label>
       <div class="col-md-5"> 
        {{ obj_form.title(class_="form-control") }}
@@ -68,11 +82,13 @@
      {{ obj_form.contributors.label }}
      </label>
      <div class="col-lg-4">
-      {{ obj_form.contributors(class_="form-control") }}
+      {% for contributor in obj_form.contributors %}
+      {{ contributor(class_="form-control") }}
       <a href="#" data-bind="click: addContributor" 
                   id="AddContributorBtn">
        <i class="fa fa-plus-circle"></i>
       </a>
+      {% endfor %}
      </div>
     {# END contributors #}
     </div>
