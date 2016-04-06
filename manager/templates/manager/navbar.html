@@ -10,9 +10,13 @@
     <li class="nav-item">
       <a class="nav-link" href="#">Edit</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Remove</a>
+    <li class="nav-item {% if request.path.startswith("/delete") %}active{% endif %}">
+      <a class="nav-link" href="{{ url_for("remove_fedora_object") }}">Remove</a>
     </li>
+     <li class="nav-item {% if request.path.startswith("/batch") %}active{% endif %}">
+      <a class="nav-link" href="{{ url_for("batch_operations") }}">Batch</a>
+    </li>
+
     <li class="nav-item pull-left">
       <a class="nav-link" href="{{ url_for('index', page='help') }}">Help</a>
     </li>

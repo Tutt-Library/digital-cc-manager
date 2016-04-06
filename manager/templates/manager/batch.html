@@ -1,0 +1,67 @@
+{% extends 'manager/base.html' %}
+
+{% block main %}
+<div class="container">
+    <h2>Batch Operations</h2>
+
+    <hr>
+    <a id="add" name="add"></a>
+    <h3>Add Objects</h3>
+    <form method="POST" 
+         action="{{ url_for('new_fedora_object') }}">
+    {{ obj_form.csrf_token }}
+    {# START Object Select #}
+    <div class="form-group row">
+     <label class="col-md-2 form-control-label" 
+            for="object_template">
+      {{ obj_form.object_template.label }}
+     </label>
+     <div class="col-md-3">
+       {{ obj_form.object_template(class_="form-control", 
+              **{"data-bind": "click: displayContentModel, value: chosenContentModel"}) }}
+     </div>
+    {# END Object Select #}
+    </div>
+    <div id="objAccordion" role="tablist" aria-multiselectable="true">
+    {% include 'manager/snippets/title-creators-contributors.html' %}
+    {% include 'manager/snippets/dates-descriptive.html' %}
+    {% include 'manager/snippets/subjects.html' %}
+    {% include 'manager/snippets/rights-repository.html' %}
+    {# START num_objects #}
+    <div class="form-group row">
+      <label class="form-control-label col-md-2" for="num_objects">
+      {{ obj_form.number_objects.label }}  
+      </label>
+      {# START num_objects controls #}
+      <div class="col-md-3">
+         {{ obj_form.number_objects(class_="form-control", value="1") }}  
+       {# END num_objects controls #}
+      </div>
+    {# END num_objects #}
+    </div> 
+    </div>
+    </div>
+    {# START submit #}
+    <div class="form-group">
+     <div class="controls col-lg-6">
+      <input type="submit" class="btn btn-primary" value="Add Objects">
+     </div>
+    {# END submit #}
+    </div>
+    </form>
+    <hr>
+    <h3>MODS Batch Update</h3>
+    <form method="POST"
+        action="{{ url_for('batch_operations') }}">
+    <div class="form-group row">
+        <label class="form-control-label col-md-2" for="num_objects">
+        {{ update_mods.select_xpath.label }}
+        </label>
+        <div class="col-md-4">
+            {{ update_mods.select_xpath(class_="form-control") }}
+        </div>
+        
+    </div>
+    </form>
+</div>
+{% endblock %}

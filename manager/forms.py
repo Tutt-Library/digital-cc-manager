@@ -70,10 +70,23 @@ class DatastreamUpload(Form):
     ds_label = StringField("Label")
     datastream = FileField("Datastream")
 
+class DeleteFedoraObject(Form):
+    pid = StringField(label="PID to removed",
+                      validators=[DataRequired()])
+
+
+class MODSBatchUpdate(Form):
+    new_value = StringField(label="New Value")
+    original_value = StringField(label="Original Value")
+    select_xpath = StringField(label="MODS Selection XPath")
+    
+
 class MODSMetadata(Form):
     admin_note = TextAreaField(label='Administrative Notes')
     alt_title = StringField(label='Alternative Title')
-    collection_pid = StringField(label="PID of Parent Collection")
+    collection_pid = StringField(
+        label="PID of Parent Collection",
+        validators=[DataRequired()])
     contributors = FieldList(StringField("Contributors"), min_entries=1)
     corporate_contributors = StringField("Corporate Contributors")
     corporate_creators = StringField("Corporate Creators")
