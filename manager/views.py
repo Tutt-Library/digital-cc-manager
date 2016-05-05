@@ -5,11 +5,13 @@ __author__ = "Jeremy Nelson, Sarah Bogard"
 from flask import abort, render_template, request
 
 from .app import app
-from .forms import DeleteFedoraObject, MODSMetadata, MODSBatchUpdate
+from .forms import DeleteFedoraObjectForm, MODSMetadataForm, MODSBatchUpdateForm
+from .forms import SelectPIDForm
+from .models import MODS
 
 @app.route("/batch", methods=["GET", "POST"])
 def batch_operations():
-    mods_form = MODSMetadata()
+    mods_form = MODSMetadataForm()
     mods_update_form = MODSBatchUpdate()
     return render_template(
         "manager/batch.html",
@@ -17,9 +19,21 @@ def batch_operations():
         update_mods=mods_update_form)
 
 
+
+@app.route("/new", methods=["GET", "POST"])
+def new_fedora_object():
+    """New View for adding and saving Fedora Objects"""
+    mods_form = MODSMetadataForm()
+    if mods_form.validate_on_submit():
+        return "Success {}".format(mods)
+    return render_template(
+        "manager/object.html",
+        action="Add",
+        obj_form=mods_form)
+
 @app.route("/delete", methods=["GET", "POST"])
 def remove_fedora_object():
-    delete_form = DeleteFedoraObject()
+    delete_form = DeleteFedoraObjectForm()
     if delete_form.validate_on_submit():
         pid = delete_form.pid
         return "Successfully deleted {}".format(pid)
@@ -27,20 +41,20 @@ def remove_fedora_object():
         "manager/delete.html",
         delete_form=delete_form)
 
-
-@app.route("/new", methods=["GET", "POST"])
-def new_fedora_object():
-    """New View for adding and saving Fedora Objects"""
-    mods_form = MODSMetadata()
-    print("Validated {}".format(mods_form.errors()))
-    if mods_form.validate_on_submit():
-        return "Success"
+@app.route("/update", methods=["GET", "POST"])
+def update_fedora_object():
+    pid = request.values.get("pid")
+    if pid is None:
+        return render_template(
+            "manager/select.html", 
+            select_pid_form = SelectPIDForm())
+    mods_form = MODSMetadataForm()
     return render_template(
         "manager/object.html",
-        action="Add",
+        action="Edit {}".format(pid),
         obj_form=mods_form)
-
-
+   
+    
 
 @app.route("/<path:page>")
 @app.route("/")

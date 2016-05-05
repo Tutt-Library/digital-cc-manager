@@ -52,36 +52,36 @@ MARC_FREQUENCY = [('choose', 'Choose...'),
                   ('Completely irregular', 'Completely irregular')]
 
 OBJECT_TEMPLATES = [(0, 'Choose model'),
-                    (1, 'Meeting Minutes'),
-                    (2, 'Newsletter'),
-                    (3, 'Podcast'),
-                    (4, 'Video'),
-                    (5, 'Master (All fields)')]
+                    ('1', 'Meeting Minutes'),
+                    ('2', 'Newsletter'),
+                    ('3', 'Podcast'),
+                    ('4', 'Video'),
+                    ('5', 'Master (All fields)')]
 
 RIGHTS_STATEMENT = "Copyright restrictions apply. Contact Colorado College for permission to publish."
 PLACE = 'Colorado Springs (Colo.)'
 PUBLISHER = "Colorado College"
 PUBLICATION_PLACE = 'Colorado Springs, Colorado'
 
-class DatastreamUpload(Form):
+class DatastreamUploadForm(Form):
     content_model = SelectField(
         "Content Model",
         choices=ISLANDORA_CONTENT_MODELS)
     ds_label = StringField("Label")
     datastream = FileField("Datastream")
 
-class DeleteFedoraObject(Form):
+class DeleteFedoraObjectForm(Form):
     pid = StringField(label="PID to removed",
                       validators=[DataRequired()])
 
 
-class MODSBatchUpdate(Form):
+class MODSBatchUpdateForm(Form):
     new_value = StringField(label="New Value")
     original_value = StringField(label="Original Value")
     select_xpath = StringField(label="MODS Selection XPath")
     
 
-class MODSMetadata(Form):
+class MODSMetadataForm(Form):
     admin_note = TextAreaField(label='Administrative Notes')
     alt_title = StringField(label='Alternative Title')
     collection_pid = StringField(
@@ -91,7 +91,7 @@ class MODSMetadata(Form):
     corporate_contributors = StringField("Corporate Contributors")
     corporate_creators = StringField("Corporate Creators")
     creators = StringField("Creators")
-    datastreams = FieldList(FormField(DatastreamUpload), min_entries=1)
+    datastreams = FieldList(FormField(DatastreamUploadForm), min_entries=1)
     date_created = DateField(label='Date Created')
     digital_origin = SelectField(choices=DIGITAL_ORIGIN,
                                  label='Digital Origin')
@@ -123,3 +123,7 @@ class MODSMetadata(Form):
                         validators=[DataRequired()])
     type_of_resource = StringField(
         label='Type of Resource')
+
+class SelectPIDForm(Form):
+    pid = StringField(label="PID to removed",
+                      validators=[DataRequired()])

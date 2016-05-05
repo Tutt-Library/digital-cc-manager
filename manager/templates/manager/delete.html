@@ -5,7 +5,7 @@
     <h2>Delete Fedora Object</h2>
    <form method="POST" 
          action="{{ url_for('remove_fedora_object') }}">
-         {{ delete_form.csrf_token }}>
+         {{ delete_form.csrf_token }}
         <div class="form-group row">
             <label class="form-control-label col-md-2" for="pid">
                 Enter PID to be deleted from Fedora

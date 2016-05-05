@@ -7,9 +7,11 @@
 <div class="container">
     <h1>Digital CC Manager</h1>
     <div class="row">
-        <section class="col-md-4">
+        <section class="col-md-5">
             <a href="{{ url_for('new_fedora_object') }}"
                class="btn btn-success">Add Object</a>
+            <a href="{{ url_for('update_fedora_object') }}"
+               class="btn btn-info">Edit Object</a>
             <a href="{{ url_for('remove_fedora_object') }}"
                class="btn btn-danger">Remove Object</a>
 

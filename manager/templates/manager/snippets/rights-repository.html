@@ -1,6 +1,9 @@
 <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="rightsHeading">
       <h4 class="panel-title">
+           {% if obj_form.collection_pid.errors %}
+           <span style="color: red">ERRORS!</span>
+           {% endif %}
         <a data-toggle="collapse" 
            data-parent="#objAccordion" 
            href="#rights-repo" aria-expanded="true" 
@@ -36,7 +39,17 @@
     </div>
         <h5>Fedora Repository Information</h5>
     {# START Parent Collection PID #}
-    <div class="form-group row">
+    <div class="form-group row {% if obj_form.collection_pid.errors %}bg-danger{% endif %}">
+    {% if obj_form.collection_pid.errors %}
+        <div class="col-md-2">
+        <h5>Errors</h5>
+        <ol>
+        {% for error in obj_form.collection_pid.errors %}
+            <li><strong>{{ error }}</strong></li>
+        {% endfor %}
+        </ol>
+        </div>
+    {% endif %}
      <label class="form-control-label col-md-2" for="collection_pid">
        {{ obj_form.collection_pid.label }}
      </label>
