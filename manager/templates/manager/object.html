@@ -1,6 +1,18 @@
 {% extends 'manager/base.html' %}
 
+{% block main_alt %}
+<div class="container">
+   {% for field in obj_form %}
+   <div class="form-group row"> 
+     <label class="col-md-2 form-control-label" 
+            for="title">{{ field }}</label>
+
+   </div>
+   {% endfor %}
+</div>
+{% endblock %}
 {% block main %}
+
 {# START addObjectFromTemplate DIV #}
 <div class="container">
    <h2>{{ action }} Fedora Object(s)</h2>
@@ -44,6 +56,7 @@
   </div>
 {% endblock %}
 
+
 {% block more_js %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
 <script type="text/html" id="datastream-template">
@@ -79,6 +92,7 @@
    self.showGenre = ko.observable(false);
    self.showForm = ko.observable(false);
    self.showSubjectDates = ko.observable(false);
+   self.showThesis = ko.observable(false);
    self.meetingMinutesTemplate = ko.observable(false);
    self.topicOne = ko.observable();
    self.genreOptions = ko.observableArray();
@@ -148,6 +162,7 @@
           self.showExtent(true);
           self.showForm(true);
           self.showSubjectDates(true);
+          self.showThesis(true);
           break;
 
         default:

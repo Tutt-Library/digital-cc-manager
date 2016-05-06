@@ -82,17 +82,25 @@ class MODSBatchUpdateForm(Form):
     
 
 class MODSMetadataForm(Form):
-    admin_note = TextAreaField(label='Administrative Notes')
+    admin_notes = FieldList(TextAreaField(label='Administrative Notes'),
+                            min_entries=1)
     alt_title = StringField(label='Alternative Title')
     collection_pid = StringField(
         label="PID of Parent Collection",
         validators=[DataRequired()])
     contributors = FieldList(StringField("Contributors"), min_entries=1)
-    corporate_contributors = StringField("Corporate Contributors")
-    corporate_creators = StringField("Corporate Creators")
-    creators = StringField("Creators")
+    corporate_contributors = FieldList(
+        StringField("Corporate Contributors"),
+        min_entries=1)
+    corporate_creators = FieldList(
+        StringField("Corporate Creators"),
+        min_entries=1)
+    creators = FieldList(StringField("Creators"),
+                         min_entries=1)
     datastreams = FieldList(FormField(DatastreamUploadForm), min_entries=1)
-    date_created = DateField(label='Date Created')
+    date_created = StringField(label='Date Created')
+    date_issued = StringField(label="Date Issued")
+    degree_grantor = StringField(label="degree grantor")
     digital_origin = SelectField(choices=DIGITAL_ORIGIN,
                                  label='Digital Origin')
     description = TextAreaField(label='Description')
@@ -109,6 +117,7 @@ class MODSMetadataForm(Form):
     organizations = FieldList(StringField("Organization", default=PUBLISHER), min_entries=1)
     rights_holder = TextAreaField(label='Rights Statement',
                                   default=RIGHTS_STATEMENT)
+    sponsor = StringField("Sponsor")
     subject_dates = FieldList(
         StringField(label='Subject -- Dates'), 
         min_entries=1)
@@ -118,6 +127,9 @@ class MODSMetadataForm(Form):
         min_entries=1)
     subject_topics = FieldList(
         StringField(label='Subject -- Topic'), 
+        min_entries=1)
+    thesis_advisors = FieldList(
+        StringField(label="Thesis Advisor"),
         min_entries=1)
     title = StringField(label='Title',
                         validators=[DataRequired()])

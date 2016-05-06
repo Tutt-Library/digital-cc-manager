@@ -17,15 +17,17 @@
          role="tabpanel" 
          aria-labelledby="dateHeading">
         <h5>Copyrights &amp; Permissions</h5>
-    {# START admin_note #}
+    {# START admin_notes #}
+    {% for admin_note in obj_form.admin_notes %}
     <div class="form-group row">
      <label class="form-control-label col-md-2" for="admin_note">
-     {{ obj_form.admin_note.label }}
+     {{ admin_note.label }}
      </label>
      <div class="col-md-4">
-      {{ obj_form.admin_note(class_="form-control", rows=4) }}
+      {{ admin_note(class_="form-control", rows=4) }}
      </div>
-    {# END admin_note #}
+    {% endfor %}
+    {# END admin_notes #}
     </div>
     {# START Use and Reproduction Rights Holder #}
     <div class="form-group row">

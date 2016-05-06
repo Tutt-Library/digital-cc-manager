@@ -41,37 +41,42 @@
     </div>
 
     {# START creators title #}
+    {% for creator in obj_form.creators %}
     <div class="form-group row">
      <label class="col-md-2 form-control-label" for="creators">
-       {{ obj_form.creators.label }}
+       {{ creator.label }}
      </label>
-
      <div class="col-lg-4">
-       {{ obj_form.creators(class_="form-control") }}
-      <a href="#" 
+       {{ creator(class_="form-control") }}
+        <a href="#" 
          data-bind="click: addCreator" 
          id="AddCreatorBtn">
         <i class="fa fa-plus-circle"></i>
       </a>
      </div>
+     {% endfor %}
+     
+
     {# END alternate creators #}
     </div>
 
 
-     {# START corporate creators #}
+    {# START corporate creators #}
+    {% for corporate_creator in obj_form.corporate_creators %}
     <div class="form-group row" 
          data-bind="visible: showCorporateCreators">
      <label class="form-control-label col-md-2" 
         for="corporate_contributors ">
-     {{ obj_form.corporate_creators.label }}
+     {{ corporate_creator.label }}
      </label>
      <div class="col-md-4">
-      {{ obj_form.corporate_creators(class_="form-control") }}
+      {{ corporate_creator(class_="form-control") }}
       <a href="#" data-bind="click: addCorporateCreator" 
                   id="AddCorporateCreatorBtn">
        <i class="fa fa-plus-circle"></i>
       </a>
      </div>
+    {% endfor %}
     {# END corporate creators #}
     </div>
 
@@ -93,7 +98,22 @@
     {# END contributors #}
     </div>
 
-
+    {# START thesis_advisors #}
+    <div class="form-group row" data-bind="visible: showThesis">
+     <label class="form-control-label col-md-2" for="thesis_advisors">
+     {{ obj_form.thesis_advisors.label }}
+     </label>
+     <div class="col-lg-4">
+      {% for advisor in obj_form.thesis_advisors %}
+      {{ advisor(class_="form-control") }}
+      <a href="#" {#data-bind="click: addThesisAdvisor" 
+                  id="AddContributorBtn" #}>
+       <i class="fa fa-plus-circle"></i>
+      </a>
+      {% endfor %}
+     </div>
+    {# END thesis_advisors #}
+    </div>
    </div>
   </div>
 

@@ -2,6 +2,7 @@
 
 __author__ = "Jeremy Nelson, Sarah Bogard"
 
+import requests
 from flask import abort, render_template, request
 
 from .app import app
@@ -48,7 +49,18 @@ def update_fedora_object():
         return render_template(
             "manager/select.html", 
             select_pid_form = SelectPIDForm())
+    mods_base_url = "{}{}/datastreams/MODS".format(
+        app.config.get("REST_URL"),
+        pid)
+    get_mods_url = "{}/content".format(mods_base_url)
+    mods_result = requests.get(
+        get_mods_url,
+        auth=app.config.get("FEDORA_AUTH"))
+    if mods_result.status_code > 399:
+        abort(500)
+    mods_doc = MODS(xml=mods_result.text)
     mods_form = MODSMetadataForm()
+    mods_doc.populate(mods_form)
     return render_template(
         "manager/object.html",
         action="Edit {}".format(pid),
