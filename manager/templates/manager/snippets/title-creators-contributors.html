@@ -40,7 +40,18 @@
     {# END title #}
     </div>
 
-    {# START creators title #}
+    {# START abstract #}
+     <div class="form-group row" data-bind="visible: showThesis">
+     <label class="col-md-2 form-control-label" for="abstact">
+       {{ obj_form.abstract.label }}
+     </label>
+     <div class="col-md-6">
+       {{ obj_form.abstract(class_="form-control") }}
+     </div>
+    {# END abstract #} 
+    </div>
+
+    {# START creators  #}
     {% for creator in obj_form.creators %}
     <div class="form-group row">
      <label class="col-md-2 form-control-label" for="creators">
@@ -98,22 +109,8 @@
     {# END contributors #}
     </div>
 
-    {# START thesis_advisors #}
-    <div class="form-group row" data-bind="visible: showThesis">
-     <label class="form-control-label col-md-2" for="thesis_advisors">
-     {{ obj_form.thesis_advisors.label }}
-     </label>
-     <div class="col-lg-4">
-      {% for advisor in obj_form.thesis_advisors %}
-      {{ advisor(class_="form-control") }}
-      <a href="#" {#data-bind="click: addThesisAdvisor" 
-                  id="AddContributorBtn" #}>
-       <i class="fa fa-plus-circle"></i>
-      </a>
-      {% endfor %}
-     </div>
-    {# END thesis_advisors #}
-    </div>
+
+
    </div>
   </div>
 

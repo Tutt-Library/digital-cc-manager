@@ -56,7 +56,8 @@ OBJECT_TEMPLATES = [(0, 'Choose model'),
                     ('2', 'Newsletter'),
                     ('3', 'Podcast'),
                     ('4', 'Video'),
-                    ('5', 'Master (All fields)')]
+                    ('5', 'Thesis'),
+                    ('6', 'Master (All fields)')]
 
 RIGHTS_STATEMENT = "Copyright restrictions apply. Contact Colorado College for permission to publish."
 PLACE = 'Colorado Springs (Colo.)'
@@ -82,6 +83,7 @@ class MODSBatchUpdateForm(Form):
     
 
 class MODSMetadataForm(Form):
+    abstract = TextAreaField(label="Abstract")
     admin_notes = FieldList(TextAreaField(label='Administrative Notes'),
                             min_entries=1)
     alt_title = StringField(label='Alternative Title')
@@ -100,7 +102,7 @@ class MODSMetadataForm(Form):
     datastreams = FieldList(FormField(DatastreamUploadForm), min_entries=1)
     date_created = StringField(label='Date Created')
     date_issued = StringField(label="Date Issued")
-    degree_grantor = StringField(label="degree grantor")
+    degree_grantor = StringField(label="Degree Grantor")
     digital_origin = SelectField(choices=DIGITAL_ORIGIN,
                                  label='Digital Origin')
     description = TextAreaField(label='Description')
@@ -111,11 +113,14 @@ class MODSMetadataForm(Form):
                             label='Frequency')
     genre = SelectField(label='Genre', choices=[("choose","Choose genre")])
     genre_free_form = StringField(label='Other')
+    languages = FieldList(StringField("Language"), min_entries=1)
     number_objects = StringField(label='Number of records')
     object_template = SelectField(label='Content Model Template',
                                   choices=OBJECT_TEMPLATES)
     organizations = FieldList(StringField("Organization", default=PUBLISHER), min_entries=1)
-    rights_holder = TextAreaField(label='Rights Statement',
+    publisher = StringField("Publisher Name", default=PUBLISHER)
+    publisher_place = StringField("Publisher Location", default=PUBLICATION_PLACE)
+    rights_statement = TextAreaField(label='Rights Statement',
                                   default=RIGHTS_STATEMENT)
     sponsor = StringField("Sponsor")
     subject_dates = FieldList(

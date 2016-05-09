@@ -17,7 +17,7 @@
          class="panel-collapse collapse" 
          role="tabpanel" 
          aria-labelledby="dateHeading">
-
+    <h5>Dates</h5>
     {# START Date Created #}
     <div class="form-group row {% if obj_form.date_created.errors %}bg-danger{% endif %}">
     {% if obj_form.date_created.errors %}
@@ -38,7 +38,6 @@
      </div>
     {# END Date Created #}
     </div>
-
     {# START Digital Origin #}
     <div class="form-group row {% if obj_form.digital_origin.errors %}bg-danger{% endif %}">
      {% if obj_form.digital_origin.errors %}
@@ -81,13 +80,32 @@
     {# END Type of Resource  #}
     </div>
 
+    {# START Languages #}
+    <div class="form-group row">
+        <label class="control-label col-md-2" for="languages">
+        {{ obj_form.languages.label }}
+        </label>
+        <div class="col-md-3">
+        {% for lang in obj_form.languages %}
+        {{ lang(class_="form-control") }}
+        {% if loop.last %}
+      <a href="#" data-bind="click: addLanguage" id="AddLanguageBtn">
+        <i class="fa fa-plus-circle"></i>
+      </a>
+
+        {% endif %}
+        {% endfor %}
+        </div>
+    </div> 
+    {# END Languages #}
+
     {# START Genre #}
     <div class="form-group row" data-bind="visible: showGenre">
      <label class="control-label col-md-2" for="genre">
       {{ obj_form.genre.label }}
      </label>
      <div class="col-md-4">
-       {{ obj_form.genre(class_="form-control") }} <strong>Or</strong> 
+       {{ obj_form.genre(class_="form-control", **{"data-bind": "options: genreOptions, optionsText: 'name', optionsValue: 'value'"}) }} <strong>Or</strong> 
        {{ obj_form.genre_free_form.label }}: 
        {{ obj_form.genre_free_form(class_="form-control") }}
      </div>

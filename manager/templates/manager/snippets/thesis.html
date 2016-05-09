@@ -1,0 +1,58 @@
+<div class="panel panel-default"  data-bind="visible: showThesis">
+    <div class="panel-heading" role="tab" id="thesisHeading">
+      <h4 class="panel-title">
+           {% if obj_form.collection_pid.errors %}
+           <span style="color: red">ERRORS!</span>
+           {% endif %}
+        <a data-toggle="collapse" 
+           data-parent="#objAccordion" 
+           href="#thesis-info" aria-expanded="true" 
+           aria-controls="">
+           <i class="fa fa-graduation-cap"></i> Thesis
+        </a>
+      </h4>
+    </div>
+    <div id="thesis-info" 
+         class="panel-collapse collapse" 
+         role="tabpanel" 
+         aria-labelledby="dateHeading">
+
+       {# START thesis_advisors #}
+       <div class="form-group row">
+        <label class="form-control-label col-md-2" for="thesis_advisors">
+        {{ obj_form.thesis_advisors.label }}
+        </label>
+        <div class="col-lg-4">
+         {% for advisor in obj_form.thesis_advisors %}
+         {{ advisor(class_="form-control") }}
+         <a href="#" {#data-bind="click: addThesisAdvisor" 
+                     id="AddThesisAdvisorBtn" #}>
+          <i class="fa fa-plus-circle"></i>
+         </a>
+         {% endfor %}
+        </div>
+       {# END thesis_advisors #}
+       </div>
+        {# START Department #}
+        <div class="form-group row">
+            <label class="form-control-label col-md-2" for="sponsor">
+            Department
+            </label>
+            <div class="col-lg-4">
+            {{ obj_form.sponsor(class_="form-control") }}
+            </div> 
+        {# END Degree Grantor #}
+        </div>
+
+        {# START Degree Grantor #}
+        <div class="form-group row">
+            <label class="form-control-label col-md-2" for="thesis_advisors">
+            {{ obj_form.degree_grantor.label }}
+            </label>
+            <div class="col-lg-4">
+            {{ obj_form.degree_grantor(class_="form-control") }}
+            </div> 
+        {# END Degree Grantor #}
+        </div>
+    </div>
+</div>

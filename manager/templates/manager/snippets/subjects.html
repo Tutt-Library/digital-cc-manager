@@ -37,12 +37,34 @@
      <div class="col-md-3">
       {% for row in obj_form.subject_dates %}
        {{ row(class_="form-control") }}
+      {% if loop.last %} 
       <a href="#" data-bind="click: addDate" id="AddDateBtn">
         <i class="fa fa-plus-circle"></i>
       </a>
+    {% endif %}
+
       {% endfor %}
      </div>
     {# END date subjects #}
+    </div>
+
+    {# START topics #}
+    <div class="form-group row">
+     <label class="form-control-label col-md-2" for="subject_topics">
+     {{ obj_form.subject_topics.0.label }}
+     </label>
+     <div class="col-md-4">
+       {% for row in obj_form.subject_topics %}
+        {{ row(class_="form-control") }}
+        {% if loop.last %} 
+       <a href="#" data-bind="click: addTopic" id="AddTopicBtn">
+        <i class="fa fa-plus-circle"></i>
+               </a>
+       {% endif %}
+
+        {% endfor %}
+     </div>
+    {# END topics #}
     </div>
 
    {# START place subjects #}
@@ -53,9 +75,11 @@
      <div class="col-md-4">
        {% for row in obj_form.subject_places %}
         {{ row(class_="form-control") }}
+        {% if loop.last %} 
        <a href="#" data-bind="click: addPlace" id="AddPlaceBtn">
         <i class="fa fa-plus-circle"></i>
        </a>
+        {% endif %}
         {% endfor %}
      </div>
     {# END place subjects #}
@@ -68,9 +92,11 @@
      <div class="col-lg-4">
       {% for row in obj_form.organizations %}
       {{ row(class_="form-control") }} 
+     {% if loop.last %} 
       <a href="#" data-bind="click: addOrganization" id="AddOrgBtn">
        <i class="fa fa-plus-circle"></i>
       </a>
+     {% endif %}
       {% endfor %}
      </div>
     {# END organizations #}

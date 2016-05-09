@@ -36,6 +36,7 @@
     <div id="objAccordion" role="tablist" aria-multiselectable="true">
     {% include 'manager/snippets/title-creators-contributors.html' %}
     {% include 'manager/snippets/dates-descriptive.html' %}
+    {% include 'manager/snippets/thesis.html' %}
     {% include 'manager/snippets/subjects.html' %}
     {% include 'manager/snippets/rights-repository.html' %}
     {% include 'manager/snippets/datastreams.html' %}
@@ -139,6 +140,8 @@
           self.formValue("podcast");
           break;
 
+               
+
         // Video
         case '4':
           self.resetForm();
@@ -152,8 +155,18 @@
           self.typeOfResource("moving image"); 
           break;
 
+       // Thesis
+        case '5':
+            self.resetForm();
+            self.showThesis(true);
+            self.showExtent(true);
+            self.typeOfResource("thesis");
+            self.genreOptions.push({ name: "Thesis", value: "thesis"}); 
+
+            break;
+
        // Master Form displays everything
-       case '5':
+       case '6':
           self.resetForm()
           self.showAlternativeTitle(true);
           self.showContributors(true);
@@ -163,7 +176,14 @@
           self.showForm(true);
           self.showSubjectDates(true);
           self.showThesis(true);
+          self.genreOptions.push({ name: "Newspaper", value: "newspaper"});
+          self.genreOptions.push({ name: "Periodical", value: "periodical" });
+          self.genreOptions.push({ name: "Thesis", value: "thesis"}); 
+          self.genreOptions.push({ name: "Videorecording", value: "videorecording"}); 
+
           break;
+
+      
 
         default:
           self.resetForm();
@@ -199,6 +219,10 @@
 
    self.addDate = function() {
     self.addAdditionalField("AddDateBtn", 'subject_dates');
+   }
+
+   self.addLanguage = function() {
+    self.addAdditionalField("AddLanguageBtn", 'languages');
    }
 
    self.addOrganization = function() {
