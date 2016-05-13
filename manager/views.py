@@ -60,6 +60,7 @@ def update_fedora_object():
         abort(500)
     mods_doc = MODS(xml=mods_result.text)
     mods_form = MODSMetadataForm()
+    mods_doc.get_info(pid, app.config, mods_form)
     mods_doc.populate(mods_form)
     return render_template(
         "manager/object.html",

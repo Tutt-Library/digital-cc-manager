@@ -2,6 +2,7 @@
 __author__ = "Jeremy Nelson"
 
 import rdflib
+import requests
 import xml.etree.ElementTree as etree
 
 from .forms import DIGITAL_ORIGIN
@@ -147,6 +148,28 @@ class MODS(object):
         if element is not None:
              element.text = value
 
+    def get_info(self, pid, config, form):
+        ri_query = """SELECT distinct ?parent ?content_model
+WHERE {{
+   <info:fedora/{0}> <fedora-rels-ext:isMemberOfCollection>  ?parent .
+   <info:fedora/{0}> <fedora-model:hasModel> ?content_model
+}}""".format(pid)
+        ri_result = requests.post(config.get("RI_URL"),
+            data={"type": "tuples",
+                  "lang": "sparql",
+                "format": "json",
+                "query": ri_query},
+            auth=config.get("FEDORA_AUTH"))
+        for row in ri_result.json().get('results'):
+            print(row)
+            if 'parent' in row:
+                parent_pid = row.get('parent').split("/")[-1]
+                print(parent_pid, form.collection_pid.data)
+                form.collection_pid.data = parent_pid
+            if 'content_model' in row and \
+                not row['content_model'].endswith("3.0"):
+                form.content_model.data = row["content_model"].split("/")[-1].split(":")[-1].split("_")[-1]
+        
     
 
     def populate(self, form):

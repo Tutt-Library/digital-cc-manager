@@ -90,6 +90,8 @@ class MODSMetadataForm(Form):
     collection_pid = StringField(
         label="PID of Parent Collection",
         validators=[DataRequired()])
+    content_model = SelectField(label="Content Model", 
+        choices=ISLANDORA_CONTENT_MODELS)
     contributors = FieldList(StringField("Contributors"), min_entries=1)
     corporate_contributors = FieldList(
         StringField("Corporate Contributors"),
